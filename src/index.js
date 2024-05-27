@@ -17,7 +17,6 @@ app.use(logger);
 
 // Sentry hier maar geplaatst na lang genoeg gestoeid te hebben met de config.. :)
 Sentry.init({
-  //dsn: "https://af5e3bc9c3eef6c71592ac5cbd6427d3@o4507255710351360.ingest.de.sentry.io/4507302717423696",
   dsn: "https://af5e3bc9c3eef6c71592ac5cbd6427d3@o4507255710351360.ingest.de.sentry.io/4507302717423696",
   integrations: [
     // enable HTTP calls tracing
@@ -27,9 +26,6 @@ Sentry.init({
     // Automatically instrument Node.js libraries and frameworks
     ...Sentry.autoDiscoverNodePerformanceMonitoringIntegrations(),
   ],
-
-  // Set tracesSampleRate to 1.0 to capture 100%
-  // of transactions for performance monitoring.
 
   tracesSampleRate: 1.0,
 });
