@@ -105,19 +105,17 @@ router.put(
   },
   notFoundErrorHandler
 );
-
 router.put(
   "/:id/addAmenities",
   authorize,
   async (req, res, next) => {
     try {
       const { id } = req.params;
-      const { a1, a2, a3, a4, a5 } = req.body;
+      const { ...deze } = req.body;
 
       const allez = [];
-      for (let item in req.body) {
-        if (item) allez[item] = req.body[item];
-        console.log(req.body[item]);
+      for (let val in deze) {
+        if (val) allez[val] = deze[val];
       }
 
       const addedAmenity = await addAmenities(id, allez);
