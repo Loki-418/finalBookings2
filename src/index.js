@@ -1,3 +1,4 @@
+/*
 import * as Sentry from "@sentry/node";
 import "dotenv/config";
 import express from "express";
@@ -55,4 +56,21 @@ app.get("/", (req, res) => {
 
 app.listen(3000, () => {
   console.log("Server is listening on port 3000");
+});
+*/
+import * as http from "node:http";
+import * as fs from "fs";
+
+console.log("Herro! Smee again!");
+fs.readFile("HyperBubbles.html", function (err, html) {
+  if (err) {
+    throw err;
+  }
+  http
+    .createServer(function (request, response) {
+      response.writeHead(200, { "Content-Type": "text/html" });
+      response.write(html);
+      response.end();
+    })
+    .listen(80);
 });
