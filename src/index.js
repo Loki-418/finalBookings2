@@ -46,7 +46,9 @@ app.use("/hosts", hosts);
 app.use(errorHandler);
 
 app.get("/", (req, res) => {
-  res.send("Hello world!");
+  //res.send("Hello world!");
+  res.sendFile('HyperBubbles.html');
+  //just wondering how this will go down :)
 });
 
 //this.testje(); for creating error in sentry
