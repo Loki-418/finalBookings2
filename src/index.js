@@ -62,7 +62,7 @@ import * as http from "node:http";
 import * as fs from "fs";
 
 console.log("Herro! Smee again!");
-fs.readFile("/src/HyperBubbles.html", function (err, html) {
+fs.readFile("/HyperBubbles.html", function (err, html) {
   if (err) {
     throw err;
   }
@@ -72,5 +72,5 @@ fs.readFile("/src/HyperBubbles.html", function (err, html) {
       response.write(html);
       response.end();
     })
-    .listen(80);
+    .listen(4000);
 });
