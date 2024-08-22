@@ -60,9 +60,10 @@ app.listen(3000, () => {
 */
 import * as http from "node:http";
 import * as fs from "fs";
+import express from "express";
 
 console.log("Herro! Smee again!");
-fs.readFile("/HyperBubbles.html", function (err, html) {
+fs.readFile("../src/HyperBubbles.html", function (err, html) {
   if (err) {
     throw err;
   }
@@ -72,5 +73,5 @@ fs.readFile("/HyperBubbles.html", function (err, html) {
       response.write(html);
       response.end();
     })
-    .listen(4000);
+    .listen(10000);
 });
