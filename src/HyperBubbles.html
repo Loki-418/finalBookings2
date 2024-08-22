@@ -1,0 +1,113 @@
+<html>
+<body>
+<canvas id="canvas" width="200" height="100" style="border:1px solid #000000;"></canvas>
+
+<script>const canvas = document.getElementById("canvas");
+const context = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+var deze = Math.floor(Math.random() * 255);
+//console.log(deze);
+
+const particleArray = [];
+class Particle {
+	constructor(x = 0, y = 0) {
+		this.x = x;
+		this.y = y;
+		this.radius = Math.random() * 40;
+		this.dx = (Math.random() - 0.5) * 7;
+		this.dy = (Math.random() - 0.5) * (Math.random() * 42);
+		this.hue = 200;
+	}
+
+	//draw cirkeltje
+	draw() {
+		context.beginPath();
+		context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+		context.strokeStyle = `hsl(${this.hue} 100% 50%)`;
+		context.stroke();
+		//omdat het kan
+		if (this.y > 300) {
+		context.strokeStyle = getRandomColor();
+		}
+		context.strokeRect((Math.random() * 2), 42, this.x, this.y);
+
+		const gradient = context.createRadialGradient(
+			this.x,
+			this.y,
+			1,
+			this.x + 1.5,
+			this.y + 0.5,
+			this.radius
+		);
+		
+		
+		
+		gradient.addColorStop(0.3, getRandomColor());
+		
+		gradient.addColorStop(0.95, "rgba(255, 255, 155, 0.3)");
+
+		context.fillStyle = gradient;
+		context.fill();
+		
+	}
+
+	// move circle
+	move() {
+		this.x = this.x + this.dx;
+		this.y = this.y - this.dy;
+		
+	}
+}
+
+const handleDrawCircle = (event) => {
+	a = event.pageX;
+	b = event.pageY;
+	// c = event.pageX - (2 * event.pageX);
+	c = event.pageX * (2 * Math.random() * 15);
+	d = event.pageY - (2 * Math.random() * 15);
+	console.log(c, d);
+
+	for (let i = 0; i < 20; i++) {
+		const particle = new Particle(a, b);
+		particleArray.push(particle);
+		const particleB = new Particle(c, d);
+		particleArray.push(particleB);
+	}
+	
+};
+
+const animate = () => {
+	context.clearRect(0, 0, canvas.width, canvas.height);
+	
+	particleArray.forEach((particle) => {
+		particle?.move();
+		particle?.draw();
+	});
+
+	requestAnimationFrame(animate);
+};
+
+animate();
+
+canvas.addEventListener("click", handleDrawCircle);
+canvas.addEventListener("resize", () => {
+	canvas.width = window.innerWidth;
+	canvas.height = window.innerHeight;
+});
+
+</script>
+
+</body>
+</html>
